@@ -5,11 +5,13 @@ cmake_minimum_required (VERSION 3.5)
 # -g allows for gdb debugging
 # turn on -03 for best performance
 add_definitions(-std=c++11 -O3)
+# for debug
+#add_definitions(-std=c++11 -O0 -g)
 
 set(CXX_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS "${CXX_FLAGS}")
 
-set(sources src/MPC.cpp src/main.cpp)
+set(sources src/MPC.cpp src/main.cpp src/user.cpp)
 
 include_directories(/usr/local/include)
 link_directories(/usr/local/lib)
