@@ -31,7 +31,14 @@ const double Lf = 2.67;
 
 // NOTE: feel free to play around with this
 // or do something completely different
-double ref_v = 77.5;
+//double ref_v = 33.3;
+//double ref_v = 77.5;
+//double ref_v = 70.0;
+//double ref_v = 50.0;
+//double ref_v = 90.0;
+//double ref_v = 80.0;
+//double ref_v = 77.7;
+double ref_v = 67.3;
 
 // The solver takes all the state variables and actuator
 // variables in a singular vector. Thus, we should to establish
@@ -65,23 +72,59 @@ class FG_eval {
     // The part of the cost based on the reference state.
     for(int st = 0; st < N; st++)
     {
-      fg[0] += 8.4 * CppAD::pow(vars[cte_start + st], 2);
-      fg[0] += 0.32 * CppAD::pow(vars[epsi_start + st], 2);
-      fg[0] += 0.261 * CppAD::pow(vars[v_start + st] - ref_v, 2);
+      //fg[0] += 77.0 * CppAD::pow(vars[cte_start + st], 2);
+      //fg[0] += 100.0 * CppAD::pow(vars[cte_start + st], 2);
+      //fg[0] += CppAD::pow(vars[cte_start + st], 2);
+      //fg[0] += 33.0 * CppAD::pow(vars[cte_start + st], 2);
+      fg[0] += 3.3 * CppAD::pow(vars[cte_start + st], 2);
+      //fg[0] += 500.0 * CppAD::pow(vars[cte_start + st], 2);
+      //fg[0] += 8.4 * CppAD::pow(vars[cte_start + st], 2);
+      //fg[0] += 3.2 * CppAD::pow(vars[epsi_start + st], 2);
+      fg[0] += 0.2 * CppAD::pow(vars[epsi_start + st], 2);
+      //fg[0] += 0.32 * CppAD::pow(vars[epsi_start + st], 2);
+      //fg[0] += 2.61 * CppAD::pow(vars[v_start + st] - ref_v, 2);
+      fg[0] += 0.1 * CppAD::pow(vars[v_start + st] - ref_v, 2);
+      //fg[0] += 0.261 * CppAD::pow(vars[v_start + st] - ref_v, 2);
     }
 
     // Minimize the use of actuators.
     for(int st = 0; st < N - 1; st++)
     {
-      fg[0] += 600000 * CppAD::pow(vars[delta_start + st], 2);
-      fg[0] += 17.1 * CppAD::pow(vars[a_start + st], 2);
+      /* If I adjust this parameter then the curve doesn't move well. */
+      //fg[0] += CppAD::pow(vars[delta_start + st], 2);
+      //fg[0] += 77 * CppAD::pow(vars[delta_start + st], 2);
+      //fg[0] += 100.0 * CppAD::pow(vars[delta_start + st], 2);
+      //fg[0] += 33.3 * CppAD::pow(vars[delta_start + st], 2);
+      //fg[0] += 333.3 * CppAD::pow(vars[delta_start + st], 2);
+      /* It's also good however go out */
+      //fg[0] += 33333.3 * CppAD::pow(vars[delta_start + st], 2);
+      /* This value doesn't move */
+      //fg[0] += 333333.3 * CppAD::pow(vars[delta_start + st], 2);
+      fg[0] += 77777.7 * CppAD::pow(vars[delta_start + st], 2);
+      //fg[0] += 500 * CppAD::pow(vars[delta_start + st], 2);
+      //fg[0] += 6000 * CppAD::pow(vars[delta_start + st], 2);
+      //fg[0] += 60000 * CppAD::pow(vars[delta_start + st], 2);
+      //fg[0] += 600000 * CppAD::pow(vars[delta_start + st], 2);
+      //fg[0] += 77.1 * CppAD::pow(vars[a_start + st], 2);
+      //fg[0] += CppAD::pow(vars[a_start + st], 2);
+      fg[0] += 7.7 * CppAD::pow(vars[a_start + st], 2);
+      //fg[0] += 17.1 * CppAD::pow(vars[a_start + st], 2);
     }
 
     // Minimize the value gap between sequential actuations.
     for(int st = 0; st < N - 2; st++)
     {
-      fg[0] += 0.01 * CppAD::pow(vars[delta_start + st + 1] - vars[delta_start + st], 2);
-      fg[0] += 0.00001 * CppAD::pow(vars[a_start + st + 1] - vars[a_start + st], 2);
+      //fg[0] += CppAD::pow(vars[delta_start + st + 1] - vars[delta_start + st], 2);
+      //fg[0] += 0.001 * CppAD::pow(vars[delta_start + st + 1] - vars[delta_start + st], 2);
+      //fg[0] += 0.0001 * CppAD::pow(vars[delta_start + st + 1] - vars[delta_start + st], 2);
+      fg[0] += 0.1 * CppAD::pow(vars[delta_start + st + 1] - vars[delta_start + st], 2);
+      //fg[0] += 0.01 * CppAD::pow(vars[delta_start + st + 1] - vars[delta_start + st], 2);
+      //fg[0] += CppAD::pow(vars[a_start + st + 1] - vars[a_start + st], 2);
+      //fg[0] += 0.1 * CppAD::pow(vars[a_start + st + 1] - vars[a_start + st], 2);
+      //fg[0] += 0.01 * CppAD::pow(vars[a_start + st + 1] - vars[a_start + st], 2);
+      //fg[0] += 0.0001 * CppAD::pow(vars[a_start + st + 1] - vars[a_start + st], 2);
+      fg[0] += 0.000007 * CppAD::pow(vars[a_start + st + 1] - vars[a_start + st], 2);
+      //fg[0] += 0.00001 * CppAD::pow(vars[a_start + st + 1] - vars[a_start + st], 2);
     }
 
     // Initial constraints
