@@ -148,3 +148,8 @@ And I setting it to 100 ms (0.1 s).
 
 Latency is handled by using above equations to predict the states for after 0.1 s.  
 I use dt = 0.1 at main.cpp to control it.  
+
+## References
+
+1. Udacity Lesson(MPC)  
+2. Applied Numerical Methos with MATLAB for Engineers and Scientists 3rd Edition, Steven C. Chapra.  
