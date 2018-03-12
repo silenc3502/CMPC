@@ -89,12 +89,62 @@ First we think about below 2-nd order polynomial.
 
 ## Model
 
+The kinematic Model is important to control vehicle around the track.  
+We need to ignore Tire Forces, Gravity, and Mass for avoid complexity.  
+
 ### States
+
+x = x position of car  
+y = y position of car  
+Ψ = vehicle's angle from x direction (radian)  
+v = velocity of vehicle  
+cte = cross track error  
+eΨ = orientation error  
 
 ### Actuator Values
 
+δ = steering angle  
+a = acceleration  
+
 ### Update Equations
+
+Update equation works like below.  
+
+![full_operation](./images/9.png)
 
 ## Timestep & Elapsed Time
 
+N = 20  
+
+I tested this value with 10, 15, 25, 33, 77, 100.  
+However I think 20 is also good.  
+
+dt = 0.1  
+
+I tested this value with 0.05, 0.2.  
+I think 0.1 is also good.  
+
+I can see very interesting situation.  
+Prediction Horizon is very important to MPC.  
+We know this is T = N * dt.  
+If we make N so big then it's performance is not so good.  
+I think this is same as people.  
+If someone have so many working task then perhaps go away.  
+
+Most important mechanism is solver.  
+It finds the optimal value to we use.  
+I wanna understand it.  
+So I explore about this and I know about Optimal Design and Linear Programming.  
+However I can't understand it perfectly at this time.  
+Anyway this solver give us best steering and acceleration.  
+
 ## Model Predictive Control with Latency
+
+If we use real car, there are many mechanical systems and electric systems.  
+Electric system almost have no delay.  
+However mechanical system has big delay.  
+So that makes some latency.  
+And I setting it to 100 ms (0.1 s).  
+
+Latency is handled by using above equations to predict the states for after 0.1 s.  
+I use dt = 0.1 at main.cpp to control it.  
