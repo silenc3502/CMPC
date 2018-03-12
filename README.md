@@ -72,9 +72,20 @@ for instructions and the project rubric.
 
 ## Polynomial Fitting and MPC Preprocessing
 
-I implement this with provided code(polyfit).
-When we implement polynomial fitting then we need to understand Taylor series and Linear Algebra.
-I'll explain about this mechanism that is non-linear regression analysis.
+I implement this with provided code(polyfit).  
+However I wanna understand about curve fitting mechanism.  
+So I study it and arrange the concept to implement Non-Linear Regression Analysis about 2-nd order polynomial.  
+When we implement polynomial fitting then we need to understand Partial Differentiative, Least Square Estimation, and Linear Algebra.  
+First we think about below 2-nd order polynomial.
+
+![non_lra_1](./images/1.png)
+![non_lra_2](./images/2.png)
+![non_lra_3](./images/3.png)
+![non_lra_4](./images/4.png)
+![non_lra_5](./images/5.png)
+![non_lra_6](./images/6.png)
+![non_lra_7](./images/7.png)
+![non_lra_8](./images/8.png)
 
 ## Model
 
